@@ -4,9 +4,12 @@ class Banco
     public double saldo {get;set;}
     public double valor {get;set;}
     public int prazo{get;set;}
+    public double limite {get;set;}
 
 
-
+    public void AjustarLimite(double valor){
+        this.limite = valor;
+    }
     public void deposito(double d){
         this.saldo += d;
     }
@@ -18,15 +21,17 @@ class Banco
     public string emprestimo(double v, int p){
         this.valor = v;
         this.prazo = p;
-        double total = this.valor/this.prazo;
+        double parcela = this.valor/this.prazo;
         double juros = this.valor*0.06;
-        double ajustado = total + juros;
-        string final = "O valor a ser pago é de: "+ ajustado;  
+        double ajustado = parcela + juros;
+        double total = ajustado * this.prazo;
+        string final = "O valor a ser pago é de: "+ ajustado +" e o valor total a ser pago é de R$ "+ total; 
         return final;
     }
 
+
     public void imprime(string texto){
-    Console.WriteLine(texto);
+        Console.WriteLine(texto);
     }
 }
 
